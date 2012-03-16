@@ -29,7 +29,7 @@
 \else
   \DeclareGraphicsExtensions{.eps}
 \fi
-
+\twocolumn
 \usepackage{mathtools}
 \usepackage{alltt}
 \usepackage{wasysym}
@@ -63,21 +63,20 @@ Christopher Moran
 %******************************************************************************
 \begin{abstract}
  
-Understanding the quality of Internet services that are avaible to customers is
+Understanding the quality of Internet services that are available to customers is
 import to government organizations surveying broadband availability in their 
 country.
 
 In this work, we study the quality (in terms of download throughput) of
 broadband services available across the US. We used data provided by the FCC to
 analyze trends in the quality of services available to customers in a region.
-We compare this against consesus data, looking at how the quality of broadband
+We compare this against census data, looking at how the quality of broadband
 services relates to the median average income, finding that, in general,
 regions with a higher median income have wider access to faster services.
 However, using data collected by Ono, a BitTorrent extension, we find that
 these services are not widely used, or evident, in BitTorrent traffic.
 
 \end{abstract}
-
 
 %******************************************************************************
 \section{Problem Statement}
@@ -101,26 +100,26 @@ these services are not widely used, or evident, in BitTorrent traffic.
 \section{Results}
 \label{sec:results} 
 
-\begin{figure}
+\begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/counties_maxDown.pdf}
   \caption{}
-  \label{fig:services-hist}
-\end{figure}
+  \label{fig:services-repMaxRepDown}
+\end{figure*}
 
-\begin{figure}
+\begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/counties_typDown.pdf}
   \caption{}
-  \label{fig:services-hist}
-\end{figure}
+  \label{fig:services-repTypDown}
+\end{figure*}
 
 
 \begin{figure}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/maxIncome_maxDown.pdf}
   \caption{}
-  \label{fig:services-hist}
+  \label{fig:services-incomeVsDown}
 \end{figure}
 
 \begin{figure}
@@ -130,25 +129,39 @@ these services are not widely used, or evident, in BitTorrent traffic.
   \label{fig:services-hist}
 \end{figure}
 
-\begin{figure}
+\begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/counties_btMaxDown.pdf}
   \caption{}
-  \label{fig:services-hist}
-\end{figure}
+  \label{fig:services-btMaxDown}
+\end{figure*}
 
-\begin{figure}
+\begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/map.pdf}
   \caption{}
-  \label{fig:services-hist}
-\end{figure}
+  \label{fig:services-net-index-map}
+\end{figure*}
 
 %******************************************************************************
 \section{Future Work}
 \label{sec:future-work} 
 
+There are still many ways to aggregate and compare the datasets that we have
+collected.  One aspect we'd be interested in seeing is the quality of services
+that are available and commonly subscribed to in a focused geographic location.
+In cities with areas of lower and higher median incomes, we plan to compare the
+services available. For example, we could compare speeds in the north side,
+south side, and suburbs of Chicago, as well as speeds in areas of low or high
+population density both within and across cities (e.g. compare services in New
+York City and Los Angeles).  
 
+We also plan to conduct a longitudinal study of throughput speeds as seen by
+BitTorrent users across the US as well as in other countries.  Additionally we
+are also interested in identifying certain regions with a large number of Ono
+users to identify growth in that area over time.  This would allow us to 
+compare the growth and development of residential broadband networks over
+an extended period of time across countries and regions within countries.
 
 %******************************************************************************
 \section{Conclusion}
