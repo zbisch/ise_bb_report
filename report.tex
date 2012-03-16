@@ -136,14 +136,6 @@ speeds available in the region, as well as the advertised services.  Due to the
 fact that a large number of counties across the US had much faster "typical"
 speeds than "advertised" speeds, we excluded those results from the paper. 
 
-After joining the two datasets, we checked for a correlation between a zip 
-code's population and advertised speeds, as well as a zip code's median income
-and advertised speeds.  The population of a zip code
-
-%******************************************************************************
-\section{Results}
-\label{sec:results} 
-
 \begin{table}
     \centering
     \small
@@ -170,6 +162,22 @@ with a maximum download throughput between 3 Mbps and
 \label{table:service-classes}
 \end{table}
 
+Table~\ref{table:service-classes} describes how ISPs were classified in the 
+FCC's broadband map dataset. Each number represents a ``class'' of Internet
+services. The second and third column show the upper and lower bound for 
+that class.
+
+After joining the two datasets, we checked for a correlation between a zip
+code's population and advertised speeds, as well as a zip code's median income
+and advertised speeds.  We repeated this analysis using maximum speeds reported
+by Ono users.
+
+%******************************************************************************
+\section{Results}
+\label{sec:results} 
+
+
+
 \begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/counties_maxDown.pdf}
@@ -180,16 +188,32 @@ download throughput.}
   \label{fig:services-repMaxRepDown}
 \end{figure*}
 
-%\begin{figure*}
-%\centering
-%        \includegraphics[width=0.9\linewidth]{figs/counties_typDown.pdf}
-%  \caption{ The maximum typical download speed that is available in a
-%county, reported by measurements in the study. Again, the darker
-%colors represent faster tiers of broadband services. Many counties are 
-%reported as having a significantly higher typical speed 
-%than advertised speed (e.g. most of New York, northern California). }
-%  \label{fig:services-repTypDown}
-%\end{figure*}
+In this section, we summarize the more interesting results we found in this study. 
+We begin by looking at data from the FCC's broadband map.
+
+Figure~\ref{fig:services-repMaxRepDown} shows the fastest broadband services
+that are available across a county, which is aggregated over all zip codes.
+Darker colors represent faster tiers of Internet being available somewhere in
+that county.  For example, counties in southern California and counties
+surrounding Portland, OR have access to services in the 100 Mbps to 1 Gbps
+range.  In the northeast section of the US, around eastern New York, New Jersey
+and Massachusetts show wider access to faster services than the south central
+section of the US.  Gray counties represent regions where information was 
+not available in broadband map data.  This may be regions that were not
+covered in the study, or regions that do not have access to broadband 
+services.
+
+
+
+
+
+%\begin{figure*} \centering
+%\includegraphics[width=0.9\linewidth]{figs/counties_typDown.pdf} \caption{ The
+%maximum typical download speed that is available in a county, reported by
+%measurements in the study. Again, the darker colors represent faster tiers of
+%broadband services. Many counties are reported as having a significantly
+%higher typical speed than advertised speed (e.g. most of New York, northern
+%California). } \label{fig:services-repTypDown} \end{figure*}
 
 
 \begin{figure}
@@ -201,6 +225,17 @@ zip code.}
   \label{fig:services-incomeVsDown}
 \end{figure}
 
+Next, we analyzed the broadband map data and the census data to look for a
+correlation with a region's population or median income.  For this analysis,
+we grouped regions by zip code instead of county. Between a region's population
+and median income, we found no correlation (correlation coefficient of 
+approximately r = 0.10).  However, we found a weak correlation between 
+a region's median income and the speed of services available (r = 0.43). 
+Fig.~\ref{fig:services-incomeVsDown} shows a scatter plot of the median
+income in a region, and the maximum available speed available. In general
+regions with a lower median income will not have access to the faster 
+services.
+
 \begin{figure}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/all_hist.pdf}
@@ -209,6 +244,14 @@ service falls into that level of service in terms of download throughput.
 Regions are separated by the median income for that region.}
   \label{fig:services-hist}
 \end{figure}
+
+In fig.~\ref{fig:services-hist} we classified regions by their median income
+and generated a histogram of the services available in that region.  At the
+lower tiers of access speeds, we see that low income groups depend on those
+services more often.  Then, as we move towards the faster services, we see
+that lower income regions are less likely to have those services, while 
+regions with over \$75k annual income see wider access to services 
+at or above 100 Mbps.
 
 \begin{figure*}
 \centering
@@ -219,6 +262,27 @@ to 100 Mbps while white corresponds to 100 kbps.}
   \label{fig:services-btMaxDown}
 \end{figure*}
 
+We also looked at the download speeds that were achieved by Ono users while
+downloading content on BitTorrent. While we had originally performed this
+analysis at the state granularity, performing it at the county leveled revealed
+that there were states which contained regions that had either fast Internet
+access or saw had no BitTorrent users at all.  This is most likely due to the
+population density being too low, but may also be due to users in these regions
+not having fast enough Internet access to use BitTorrent. 
+
+States such as South Dakota, for example, had counties with relatively fast
+Internet access while the remainder of the counties had no samples in our
+dataset, biasing a state-level analysis towards the regions with heavy Internet
+users. In fact, some of the fastest download speeds seen in our BitTorrent
+dataset were reported in South Dakota, on an ISP called MidContinental.  In
+States such as New Jersey, however, generally had faster Internet services
+available in counties across the state.  
+
+One interesting thing to note, however, is that in our dataset, we did not see
+any regions where a BitTorrent user achieved a download rate at or above 100
+Mbps, despite the fact that, according to the FCC's national broadband map
+these services are available in a significant fraction of regions.
+
 \begin{figure*}
 \centering
         \includegraphics[width=0.9\linewidth]{figs/map.pdf}
@@ -226,6 +290,16 @@ to 100 Mbps while white corresponds to 100 kbps.}
 user download throughput from speedtest.net results.}
   \label{fig:services-net-index-map}
 \end{figure*}
+
+Next, we compared the results and rankings against those published by
+Speedtest.net's NetIndex.  We included a screenshot of their view of the US
+in~\ref{fig:services-net-index-map}. New Jersey and South Dakota ranked first
+and second in terms of average bandwidth.  Both of these states ranked widely
+in the state-wide average in our dataset, as well.  However, we expect that the
+speeds seen in South Dakota are heavily biased by BitTorrent users in more
+popular regions, such as Souix Falls. With a lack of coverage, it is difficult
+to characterize how the services are available in this region.
+
 
 %******************************************************************************
 \section{Future Work}
